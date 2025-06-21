@@ -1,0 +1,23 @@
+body{
+    font-family: sans-serif;
+    margin: 40px;
+    text-align: center;
+}
+#form-ponderada{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: auto;
+    gap: 10px;
+}
+input{
+    padding: 7px;
+}
+button{
+    gap: 10px;
+    color: black;
+    background-color: silver;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+}
