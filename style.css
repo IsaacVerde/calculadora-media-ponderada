@@ -1,23 +1,287 @@
-body{
-    font-family: sans-serif;
-    margin: 40px;
-    text-align: center;
-}
-#form-ponderada{
+/* Importação das fontes do Google Fonts */
+/* 'Open Sans' é uma fonte sans-serif moderna e de alta legibilidade, ideal para texto geral. */
+/* 'Source Code Pro' é uma fonte monoespaçada, perfeita para números e resultados, dando um toque de "código" ou "matemática". */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Source+Code+Pro:wght@400;700&display=swap');
+
+/* Estilos para o corpo da página (body) */
+body {
+    /* Define a fonte padrão para todo o texto na página. */
+    font-family: 'Open Sans', sans-serif;
+    /* Cor de fundo suave e clara para a página, para um visual limpo e neutro. */
+    background-color: #f8f8f8;
+    /* Utiliza Flexbox para centralizar o conteúdo da calculadora na tela. */
     display: flex;
+    /* Alinha o conteúdo horizontalmente ao centro da tela. */
+    justify-content: center;
+    /* Alinha o conteúdo verticalmente ao centro da tela, garantindo que a calculadora fique no meio. */
+    align-items: center;
+    /* Garante que o corpo da página ocupe no mínimo 100% da altura da janela do navegador. */
+    min-height: 100vh;
+    /* Remove as margens padrão que os navegadores aplicam ao body. */
+    margin: 0;
+    /* Define a cor padrão do texto para um cinza escuro, proporcionando boa legibilidade. */
+    color: #333;
+    /* Define o espaçamento entre linhas para uma melhor leitura do texto. */
+    line-height: 1.6;
+}
+
+/* Estilos para o container principal da calculadora */
+.calculator-container {
+    /* Fundo branco puro para o container, imitando uma folha de cálculo ou um quadro. */
+    background-color: #ffffff;
+    /* Espaçamento interno (padding) dentro do container, dando "ar" aos elementos. */
+    padding: 30px;
+    /* Cantos levemente arredondados para um visual suave e moderno. */
+    border-radius: 8px;
+    /* Sombra sutil para dar um efeito de profundidade, como se a calculadora estivesse levemente levantada. */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    /* Centraliza o texto e os elementos (como o título e o formulário) dentro do container. */
+    text-align: center;
+    /* Define uma largura máxima para o container, para que não se estique demais em telas grandes. */
+    max-width: 450px; /* Um pouco mais largo para acomodar pares de inputs */
+    /* Em telas menores, o container ocupará 90% da largura disponível, garantindo responsividade. */
+    width: 90%;
+    /* Garante que padding e border sejam incluídos na largura e altura total do elemento. */
+    box-sizing: border-box;
+    /* Adiciona uma borda fina e discreta, como a borda de um formulário ou documento. */
+    border: 1px solid #e0e0e0;
+}
+
+/* Estilos para o título principal (h1) */
+h1 {
+    /* Define a fonte para o título, mantendo 'Open Sans' para clareza e modernidade. */
+    font-family: 'Open Sans', sans-serif;
+    /* Torna o título mais pesado (negrito) para destaque. */
+    font-weight: 700;
+    /* Cor do título, um azul escuro que transmite seriedade e organização. */
+    color: #2c3e50;
+    /* Espaçamento abaixo do título, separando-o do formulário. */
+    margin-bottom: 30px;
+    /* Tamanho da fonte do título. */
+    font-size: 2em;
+}
+
+/* Estilos para o formulário */
+form#form-ponderada {
+    /* Organiza os elementos do formulário (pares de inputs, botão, resultado) em uma coluna. */
+    display: flex;
+    /* Define a direção principal dos itens como coluna (um abaixo do outro). */
     flex-direction: column;
-    max-width: 300px;
-    margin: auto;
-    gap: 10px;
+    /* Espaçamento entre os grupos de Nota/Peso e o botão. */
+    gap: 20px; /* Um pouco mais de espaço entre os pares de inputs */
 }
-input{
-    padding: 7px;
-}
-button{
+
+/* Estilos para cada par de input (Nota e Peso) */
+.input-pair {
+    /* Usa Flexbox para colocar Label, Input, Label, Input lado a lado */
+    display: flex;
+    /* Permite que os itens quebrem para a próxima linha em telas pequenas */
+    flex-wrap: wrap;
+    /* Espaçamento entre os itens dentro de cada par (label/input) */
     gap: 10px;
-    color: black;
-    background-color: silver;
+    /* Centraliza os itens dentro do par, para um visual organizado */
+    align-items: center;
+    /* Adiciona uma borda inferior sutil para separar visualmente os pares de notas/pesos */
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Remove a borda inferior do último input-pair para não ter borda extra */
+.input-pair:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+
+/* Estilos para as etiquetas (labels) dos campos de entrada */
+form#form-ponderada label {
+    /* Garante que cada label tenha seu espaço, mas permite que o input fique ao lado */
+    display: block;
+    /* Alinha o texto da label à esquerda. */
+    text-align: left;
+    /* Peso da fonte para as labels. */
+    font-weight: 500;
+    /* Cor das labels. */
+    color: #555;
+    /* Tamanho da fonte das labels. */
+    font-size: 1.05em;
+    /* Ocupa espaço mínimo, permitindo que inputs fiquem ao lado */
+    flex-shrink: 0; /* Impede que o label encolha */
+    width: 60px; /* Largura fixa para labels para alinhamento */
+}
+
+/* Estilos para os campos de entrada (inputs do tipo number) */
+form#form-ponderada input[type="number"] {
+    /* Faz o input ocupar o espaço restante na linha */
+    flex-grow: 1;
+    /* Espaçamento interno do input. */
+    padding: 12px;
+    /* Borda fina e discreta. */
+    border: 1px solid #ccc;
+    /* Cantos levemente arredondados. */
+    border-radius: 5px;
+    /* Tamanho da fonte dentro do input. */
+    font-size: 1.1em;
+    /* Garante que padding e border sejam incluídos na largura total. */
+    box-sizing: border-box;
+    /* Transição suave para as mudanças de cor de borda e sombra ao focar. */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* Define a fonte 'Source Code Pro' para os números, dando um toque matemático. */
+    font-family: 'Source Code Pro', monospace;
+    /* Remove margem inferior padrão que pode atrapalhar o flexbox */
+    margin-bottom: 0;
+}
+
+/* Estilos para o input quando está em foco (clicado/digitando) */
+form#form-ponderada input[type="number"]:focus {
+    /* Muda a cor da borda para um azul vibrante. */
+    border-color: #3498db;
+    /* Adiciona uma sombra suave e azulada ao focar. */
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    /* Remove a borda de contorno padrão que alguns navegadores aplicam. */
+    outline: none;
+}
+
+/* Estilos para o botão de calcular */
+form#form-ponderada button[type="submit"] {
+    /* Cor de fundo do botão, um verde esmeralda para indicar ação. */
+    background-color: #2ecc71;
+    /* Cor do texto do botão. */
+    color: white;
+    /* Espaçamento interno do botão. */
+    padding: 15px 30px;
+    /* Remove a borda padrão do botão. */
     border: none;
+    /* Cantos arredondados. */
+    border-radius: 5px;
+    /* Tamanho da fonte do botão. */
+    font-size: 1.1em;
+    /* Peso da fonte do botão (negrito). */
+    font-weight: 600;
+    /* Muda o cursor para uma "mãozinha". */
     cursor: pointer;
-    height: 30px;
+    /* Transições suaves para a cor de fundo e um pequeno efeito de "levantar". */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Faz o botão ocupar a largura total do seu container. */
+    width: 100%;
+    /* Espaçamento acima do botão. */
+    margin-top: 25px;
+    /* Garante que padding e border sejam incluídos na largura total. */
+    box-sizing: border-box;
+}
+
+/* Estilos para o botão ao passar o mouse (hover) */
+form#form-ponderada button[type="submit"]:hover {
+    /* Escurece o verde do botão ao passar o mouse. */
+    background-color: #27ae60;
+    /* Pequeno efeito de mover para cima. */
+    transform: translateY(-2px);
+}
+
+/* Estilos para a div onde o resultado será exibido */
+div#resultado {
+    /* Espaçamento acima da div de resultado. */
+    margin-top: 35px;
+    /* Espaçamento interno do bloco de resultado. */
+    padding: 20px;
+    /* Cor de fundo para o bloco de resultado, um cinza muito claro. */
+    background-color: #f5f5f5;
+    /* Cantos arredondados. */
+    border-radius: 5px;
+    /* Borda discreta, como a borda de um quadro de resultado. */
+    border: 1px solid #e0e0e0;
+    /* Tamanho da fonte para o resultado. */
+    font-size: 1.5em;
+    /* Peso da fonte para o resultado. */
+    font-weight: 700;
+    /* Cor do texto do resultado. */
+    color: #444;
+    /* Centraliza o texto dentro da div. */
+    text-align: center;
+    /* Altura mínima para o bloco de resultado, mesmo quando vazio. */
+    min-height: 50px;
+    /* Usa Flexbox para centralizar o texto verticalmente dentro da div. */
+    display: flex;
+    /* Centraliza o conteúdo horizontalmente. */
+    justify-content: center;
+    /* Centraliza o conteúdo verticalmente. */
+    align-items: center;
+    /* Define a família de fontes para o resultado para um toque de "código/matemática". */
+    font-family: 'Source Code Pro', monospace;
+    /* Para quando o resultado tiver múltiplos parágrafos, organiza-os em coluna. */
+    flex-direction: column;
+    /* Espaçamento entre os elementos filhos (se você colocar P dentro do resultado). */
+    gap: 10px;
+}
+
+/* Estilos para parágrafos dentro da div de resultado (se você usar múltiplos <p> no JS) */
+div#resultado p {
+    /* Remove margens padrão de parágrafos para que o espaçamento seja controlado pelo 'gap' da div pai */
+    margin: 0;
+    /* Garante que a fonte seja a mesma para os parágrafos */
+    font-family: 'Source Code Pro', monospace;
+    /* Ajusta o tamanho da fonte para os parágrafos, se o container tiver um font-size maior */
+    font-size: 0.9em;
+    /* Cor mais específica para os textos dos parágrafos de resultado */
+    color: #2c3e50;
+}
+
+/* Estilos para o valor final da média (se você quiser destacá-la no JS com uma classe) */
+/* Ex: <p>Média Ponderada: <span class="result-value">8.25</span></p> */
+.result-value {
+    color: #3498db; /* Um azul para o valor, como um resultado importante. */
+    font-weight: 700; /* Negrito para o valor. */
+    font-size: 1.1em; /* Um pouco maior para o valor final */
+}
+
+
+/* Estilos para a responsividade básica (se adapta a telas menores) */
+@media (max-width: 600px) {
+    /* Ajustes para o container em telas com largura de até 600px. */
+    .calculator-container {
+        /* Reduz o espaçamento interno. */
+        padding: 25px;
+        /* Remove o arredondamento dos cantos em telas muito pequenas para um visual "full-width". */
+        border-radius: 0;
+        /* Remove a sombra para um visual mais limpo em telas pequenas. */
+        box-shadow: none;
+        /* Ocupa 100% da largura. */
+        width: 100%;
+        /* Remove a largura máxima. */
+        max-width: none;
+        /* Remove a borda em telas pequenas para uma experiência mais fluida. */
+        border: none;
+    }
+
+    /* Ajusta o tamanho do título em telas menores. */
+    h1 {
+        font-size: 1.8em;
+    }
+
+    /* Ajusta o padding e o tamanho da fonte do botão. */
+    form#form-ponderada button[type="submit"] {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+
+    /* Estilos para o par de inputs em telas pequenas */
+    .input-pair {
+        flex-direction: column; /* Coloca labels e inputs um abaixo do outro */
+        align-items: flex-start; /* Alinha tudo à esquerda */
+        gap: 5px; /* Reduz o espaçamento entre itens */
+    }
+
+    .input-pair label {
+        width: auto; /* Remove largura fixa em telas pequenas */
+    }
+
+    /* Ajusta o tamanho da fonte do resultado. */
+    div#resultado {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+
+    div#resultado p {
+        font-size: 0.85em; /* Ajusta o tamanho dos parágrafos de resultado */
+    }
 }
